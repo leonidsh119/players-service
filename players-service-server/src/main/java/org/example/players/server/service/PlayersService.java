@@ -1,6 +1,7 @@
 package org.example.players.server.service;
 
 import org.example.players.sdk.Player;
+import org.example.players.server.exception.EntityNotFoundException;
 import org.example.players.server.model.PlayerEntity;
 import org.example.players.server.service.parser.PlayerReader;
 import org.example.players.server.service.parser.PlayerReaderFactory;
@@ -45,7 +46,14 @@ public class PlayersService {
     }
 
     public Player getPlayer(String playerId) {
-        return toResponse(_players.get(playerId));
+        _logger.trace("Retrieving Player with ID [{}]", playerId);
+        PlayerEntity entity = _players.get(playerId);
+        if(entity == null) {
+            _logger.error("Player with ID [{}] not found", playerId);
+            throw new EntityNotFoundException("Player", playerId);
+        }
+        _logger.trace("Found Player with ID [{}]", playerId);
+        return toResponse(entity);
     }
 
     public Player toResponse(PlayerEntity player) {
