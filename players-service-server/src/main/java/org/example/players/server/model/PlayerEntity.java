@@ -1,7 +1,11 @@
-package org.example.players.sdk;
+package org.example.players.server.model;
 
-public class Player {
-    private final String playerID;
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Document(collection = "Player")
+public class PlayerEntity {
+    private String playerID;
     private String birthYear;
     private String birthMonth;
     private String birthDay;
@@ -26,12 +30,58 @@ public class Player {
     private String retroID;
     private String bbrefID;
 
-    public Player(String playerID) {
+    public PlayerEntity() {}
+
+    public PlayerEntity(String playerID) {
         this.playerID = playerID;
+    }
+
+    public PlayerEntity(String[] attributes) {
+        if(attributes == null || attributes.length < 1) {
+            throw new RuntimeException("Attributes array can't be null. Must have at least one element for PlayerID.");
+        }
+        if(attributes.length < 24) {
+            String[] largerArray = new String[24];
+            System.arraycopy(attributes, 0, largerArray, 0, attributes.length);
+            attributes = largerArray;
+        }
+        this.playerID = attributes[0];
+        this.birthYear = attributes[1];
+        this.birthMonth = attributes[2];
+        this.birthDay = attributes[3];
+        this.birthCountry = attributes[4];
+        this.birthState = attributes[5];
+        this.birthCity = attributes[6];
+        this.deathYear = attributes[7];
+        this.deathMonth = attributes[8];
+        this.deathDay = attributes[9];
+        this.deathCountry = attributes[10];
+        this.deathState = attributes[11];
+        this.deathCity = attributes[12];
+        this.nameFirst = attributes[13];
+        this.nameLast = attributes[14];
+        this.nameGiven = attributes[15];
+        this.weight = attributes[16];
+        this.height = attributes[17];
+        this.bats = attributes[18];
+        this.throwz = attributes[19];
+        this.debut = attributes[20];
+        this.finalGame = attributes[21];
+        this.retroID = attributes[22];
+        this.bbrefID = attributes[23];
     }
 
     public String getPlayerID() {
         return playerID;
+    }
+
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
+    }
+
+    public PlayerEntity withPlayerID(String playerID) {
+        setPlayerID(playerID);
+        return this;
     }
 
     public String getBirthYear() {
@@ -42,22 +92,12 @@ public class Player {
         this.birthYear = birthYear;
     }
 
-    public Player withBirthYear(String birthYear) {
-        this.birthYear = birthYear;
-        return this;
-    }
-
     public String getBirthMonth() {
         return birthMonth;
     }
 
     public void setBirthMonth(String birthMonth) {
         this.birthMonth = birthMonth;
-    }
-
-    public Player withBirthMonth(String birthMonth) {
-        this.birthMonth = birthMonth;
-        return this;
     }
 
     public String getBirthDay() {
@@ -68,22 +108,12 @@ public class Player {
         this.birthDay = birthDay;
     }
 
-    public Player withBirthDay(String birthDay) {
-        this.birthDay = birthDay;
-        return this;
-    }
-
     public String getBirthCountry() {
         return birthCountry;
     }
 
     public void setBirthCountry(String birthCountry) {
         this.birthCountry = birthCountry;
-    }
-
-    public Player withBirthCountry(String birthCountry) {
-        this.birthCountry = birthCountry;
-        return this;
     }
 
     public String getBirthState() {
@@ -94,22 +124,12 @@ public class Player {
         this.birthState = birthState;
     }
 
-    public Player withBirthState(String birthState) {
-        this.birthState = birthState;
-        return this;
-    }
-
     public String getBirthCity() {
         return birthCity;
     }
 
     public void setBirthCity(String birthCity) {
         this.birthCity = birthCity;
-    }
-
-    public Player withBirthCity(String birthCity) {
-        this.birthCity = birthCity;
-        return this;
     }
 
     public String getDeathYear() {
@@ -120,22 +140,12 @@ public class Player {
         this.deathYear = deathYear;
     }
 
-    public Player withDeathYear(String deathYear) {
-        this.deathYear = deathYear;
-        return this;
-    }
-
     public String getDeathMonth() {
         return deathMonth;
     }
 
     public void setDeathMonth(String deathMonth) {
         this.deathMonth = deathMonth;
-    }
-
-    public Player withDeathMonth(String deathMonth) {
-        this.deathMonth = deathMonth;
-        return this;
     }
 
     public String getDeathDay() {
@@ -146,22 +156,12 @@ public class Player {
         this.deathDay = deathDay;
     }
 
-    public Player withDeathDay(String deathDay) {
-        this.deathDay = deathDay;
-        return this;
-    }
-
     public String getDeathCountry() {
         return deathCountry;
     }
 
     public void setDeathCountry(String deathCountry) {
         this.deathCountry = deathCountry;
-    }
-
-    public Player withDeathCountry(String deathCountry) {
-        this.deathCountry = deathCountry;
-        return this;
     }
 
     public String getDeathState() {
@@ -172,22 +172,12 @@ public class Player {
         this.deathState = deathState;
     }
 
-    public Player withDeathState(String deathState) {
-        this.deathState = deathState;
-        return this;
-    }
-
     public String getDeathCity() {
         return deathCity;
     }
 
     public void setDeathCity(String deathCity) {
         this.deathCity = deathCity;
-    }
-
-    public Player withDeathCity(String deathCity) {
-        this.deathCity = deathCity;
-        return this;
     }
 
     public String getNameFirst() {
@@ -198,22 +188,12 @@ public class Player {
         this.nameFirst = nameFirst;
     }
 
-    public Player withNameFirst(String nameFirst) {
-        this.nameFirst = nameFirst;
-        return this;
-    }
-
     public String getNameLast() {
         return nameLast;
     }
 
     public void setNameLast(String nameLast) {
         this.nameLast = nameLast;
-    }
-
-    public Player withNameLast(String nameLast) {
-        this.nameLast = nameLast;
-        return this;
     }
 
     public String getNameGiven() {
@@ -224,22 +204,12 @@ public class Player {
         this.nameGiven = nameGiven;
     }
 
-    public Player withNameGiven(String nameGiven) {
-        this.nameGiven = nameGiven;
-        return this;
-    }
-
     public String getWeight() {
         return weight;
     }
 
     public void setWeight(String weight) {
         this.weight = weight;
-    }
-
-    public Player withWeight(String weight) {
-        this.weight = weight;
-        return this;
     }
 
     public String getHeight() {
@@ -250,22 +220,12 @@ public class Player {
         this.height = height;
     }
 
-    public Player withHeight(String height) {
-        this.height = height;
-        return this;
-    }
-
     public String getBats() {
         return bats;
     }
 
     public void setBats(String bats) {
         this.bats = bats;
-    }
-
-    public Player withBats(String bats) {
-        this.bats = bats;
-        return this;
     }
 
     public String getThrowz() {
@@ -276,22 +236,12 @@ public class Player {
         this.throwz = throwz;
     }
 
-    public Player withThrowz(String throwz) {
-        this.throwz = throwz;
-        return this;
-    }
-
     public String getDebut() {
         return debut;
     }
 
     public void setDebut(String debut) {
         this.debut = debut;
-    }
-
-    public Player withDebut(String debut) {
-        this.debut = debut;
-        return this;
     }
 
     public String getFinalGame() {
@@ -302,11 +252,6 @@ public class Player {
         this.finalGame = finalGame;
     }
 
-    public Player withFinalGame(String finalGame) {
-        this.finalGame = finalGame;
-        return this;
-    }
-
     public String getRetroID() {
         return retroID;
     }
@@ -315,21 +260,11 @@ public class Player {
         this.retroID = retroID;
     }
 
-    public Player withRetroID(String retroID) {
-        this.retroID = retroID;
-        return this;
-    }
-
     public String getBbrefID() {
         return bbrefID;
     }
 
     public void setBbrefID(String bbrefID) {
         this.bbrefID = bbrefID;
-    }
-
-    public Player withBbrefID(String bbrefID) {
-        this.bbrefID = bbrefID;
-        return this;
     }
 }
