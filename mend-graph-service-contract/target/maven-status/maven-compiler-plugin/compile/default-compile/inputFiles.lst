@@ -1,2 +1,2 @@
-/Users/lshepetovsky/src/github/mend-graph-service/mend-graph-service-contract/src/main/java/com/mend/graph/sdk/FindUnreachableNodesRequest.java
-/Users/lshepetovsky/src/github/mend-graph-service/mend-graph-service-contract/src/main/java/com/mend/graph/sdk/HealthCheckResponse.java
+/Users/lshepetovsky/src/github/players-service/mend-graph-service-contract/src/main/java/com/mend/graph/sdk/HealthCheckResponse.java
+/Users/lshepetovsky/src/github/players-service/mend-graph-service-contract/src/main/java/com/mend/graph/sdk/FindUnreachableNodesRequest.java

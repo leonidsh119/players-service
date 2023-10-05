@@ -1,0 +1,66 @@
+2023-10-05 14:24:50 [INFO ] [restartedMain] org.springframework.boot.StartupInfoLogger.logStarting 55 - Starting Application using Java 21 on Leonids-MacBook-Pro.local with PID 35798 (/Users/lshepetovsky/src/github/players-service/mend-graph-service-server/target/classes started by lshepetovsky in /Users/lshepetovsky/src/github/players-service)
+2023-10-05 14:24:50 [DEBUG] [restartedMain] org.springframework.boot.StartupInfoLogger.logStarting 56 - Running with Spring Boot v2.7.1, Spring v5.3.21
+2023-10-05 14:24:50 [INFO ] [restartedMain] org.springframework.boot.SpringApplication.logStartupProfileInfo 634 - No active profile set, falling back to 1 default profile: "default"
+2023-10-05 14:24:50 [TRACE] [restartedMain] org.springframework.boot.autoconfigure.condition.SpringBootCondition.logOutcome 86 - Condition CacheOrGroupedOpenApiCondition on org.springdoc.core.SpringDocConfiguration#springdocBeanFactoryPostProcessor did not match due to AnyNestedCondition 0 matched 2 did not; NestedCondition on CacheOrGroupedOpenApiCondition.OnCacheDisabled found non-matching nested conditions @ConditionalOnProperty (springdoc.cache.disabled) did not find property 'springdoc.cache.disabled'; NestedCondition on CacheOrGroupedOpenApiCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 0 matched 2 did not; NestedCondition on MultipleOpenApiSupportCondition.OnActuatorDifferentPort @ConditionalOnProperty (springdoc.show-actuator) did not find property 'springdoc.show-actuator'; NestedCondition on MultipleOpenApiSupportCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 0 matched 2 did not; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupConfigProperty @ConditionalOnProperty (springdoc.group-configs[0].group) did not find property 'springdoc.group-configs[0].group'; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.GroupedOpenApi; SearchStrategy: all) did not find any beans of type org.springdoc.core.GroupedOpenApi
+2023-10-05 14:24:50 [TRACE] [restartedMain] org.springframework.boot.autoconfigure.condition.SpringBootCondition.logOutcome 86 - Condition MultipleOpenApiSupportCondition on org.springdoc.webmvc.core.MultipleOpenApiSupportConfiguration did not match due to AnyNestedCondition 0 matched 2 did not; NestedCondition on MultipleOpenApiSupportCondition.OnActuatorDifferentPort @ConditionalOnProperty (springdoc.show-actuator) did not find property 'springdoc.show-actuator'; NestedCondition on MultipleOpenApiSupportCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 0 matched 2 did not; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupConfigProperty @ConditionalOnProperty (springdoc.group-configs[0].group) did not find property 'springdoc.group-configs[0].group'; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.GroupedOpenApi; SearchStrategy: all) did not find any beans of type org.springdoc.core.GroupedOpenApi
+2023-10-05 14:24:50 [TRACE] [restartedMain] com.mend.graph.server.service.algo.GraphSearchAlgorithmFactory.getGraphSearchAlgorithm 16 - Using [BFS] Graph Search Algorithm.
+2023-10-05 14:24:50 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 295 - 
+	c.m.g.s.c.AlgoController:
+	{POST [/algo]}: findUnreachableEdges(FindUnreachableNodesRequest)
+2023-10-05 14:24:50 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 295 - 
+	c.m.g.s.c.BaseController:
+	
+2023-10-05 14:24:50 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 295 - 
+	c.m.g.s.c.HealthCheckController:
+	{GET [/healthcheck]}: healthCheck()
+2023-10-05 14:24:50 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 295 - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2023-10-05 14:24:51 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 295 - 
+	o.s.w.a.OpenApiWebMvcResource:
+	{GET [/v3/api-docs], produces [application/json]}: openapiJson(HttpServletRequest,String,Locale)
+	{GET [/v3/api-docs.yaml], produces [application/vnd.oai.openapi]}: openapiYaml(HttpServletRequest,String,Locale)
+2023-10-05 14:24:51 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 295 - 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	{GET [/swagger-ui.html]}: redirectToUi(HttpServletRequest)
+2023-10-05 14:24:51 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 295 - 
+	o.s.w.u.SwaggerConfigResource:
+	{GET [/v3/api-docs/swagger-config], produces [application/json]}: openapiJson(HttpServletRequest)
+2023-10-05 14:24:51 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractDetectingUrlHandlerMapping.detectHandlers 86 - 'beanNameHandlerMapping' {}
+2023-10-05 14:24:51 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.logMappings 177 - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]], /swagger-ui*/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]}
+2023-10-05 14:24:51 [INFO ] [restartedMain] org.springframework.boot.StartupInfoLogger.logStarted 61 - Started Application in 1.408 seconds (JVM running for 1.893)
+2023-10-05 14:25:05 [DEBUG] [SIGINT handler] sun.util.logging.internal.LoggingProviderImpl$JULWrapper.log 257 - Runtime.exit() called with status: 130
+java.lang.Throwable: Runtime.exit(130)
+	at java.base/java.lang.Shutdown.logRuntimeExit(Shutdown.java:179)
+	at java.base/java.lang.Shutdown.exit(Shutdown.java:160)
+	at java.base/java.lang.Terminator$1.handle(Terminator.java:51)
+	at java.base/jdk.internal.misc.Signal$1.run(Signal.java:218)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2023-10-05 14:47:56 [INFO ] [restartedMain] org.springframework.boot.StartupInfoLogger.logStarting 51 - Starting Application using Java 21 with PID 36317 (/Users/lshepetovsky/src/github/players-service/mend-graph-service-server/target/classes started by lshepetovsky in /Users/lshepetovsky/src/github/players-service)
+2023-10-05 14:47:56 [DEBUG] [restartedMain] org.springframework.boot.StartupInfoLogger.logStarting 52 - Running with Spring Boot v3.1.4, Spring v6.0.12
+2023-10-05 14:47:56 [INFO ] [restartedMain] org.springframework.boot.SpringApplication.logStartupProfileInfo 637 - No active profile set, falling back to 1 default profile: "default"
+2023-10-05 14:47:56 [TRACE] [restartedMain] com.mend.graph.server.service.algo.GraphSearchAlgorithmFactory.getGraphSearchAlgorithm 16 - Using [BFS] Graph Search Algorithm.
+2023-10-05 14:47:56 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 294 - 
+	c.m.g.s.c.AlgoController:
+	{POST [/algo]}: findUnreachableEdges(FindUnreachableNodesRequest)
+2023-10-05 14:47:56 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 294 - 
+	c.m.g.s.c.BaseController:
+	
+2023-10-05 14:47:56 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 294 - 
+	c.m.g.s.c.HealthCheckController:
+	{GET [/healthcheck]}: healthCheck()
+2023-10-05 14:47:56 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods 294 - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2023-10-05 14:47:56 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.AbstractDetectingUrlHandlerMapping.detectHandlers 86 - 'beanNameHandlerMapping' {}
+2023-10-05 14:47:56 [DEBUG] [restartedMain] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.logMappings 176 - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]}
+2023-10-05 14:47:56 [INFO ] [restartedMain] org.springframework.boot.StartupInfoLogger.logStarted 57 - Started Application in 0.909 seconds (process running for 1.376)
+2023-10-05 14:48:14 [DEBUG] [SIGINT handler] sun.util.logging.internal.LoggingProviderImpl$JULWrapper.log 257 - Runtime.exit() called with status: 130
+java.lang.Throwable: Runtime.exit(130)
+	at java.base/java.lang.Shutdown.logRuntimeExit(Shutdown.java:179)
+	at java.base/java.lang.Shutdown.exit(Shutdown.java:160)
+	at java.base/java.lang.Terminator$1.handle(Terminator.java:51)
+	at java.base/jdk.internal.misc.Signal$1.run(Signal.java:218)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
