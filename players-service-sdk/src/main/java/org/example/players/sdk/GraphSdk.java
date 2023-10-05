@@ -11,7 +11,7 @@ public class GraphSdk implements IGraphSdk {
     private String _apiEndpoint;
 
     public GraphSdk(String serviceUrl) {
-        _apiEndpoint = MessageFormat.format("{0}/players", serviceUrl);
+        _apiEndpoint = MessageFormat.format("{0}/api", serviceUrl);
     }
 
     public GraphSdk(String ip, int port) {
@@ -20,7 +20,7 @@ public class GraphSdk implements IGraphSdk {
 
     @Override
     public String findUnreachableNodes(FindUnreachableNodesRequest request) {
-        String url = MessageFormat.format("{0}/algo", _apiEndpoint);
+        String url = MessageFormat.format("{0}/players", _apiEndpoint);
         ResponseEntity<String> responseEntity = sendRequest(url, HttpMethod.POST, new HttpEntity<>(request), String.class);
         return responseEntity.getBody();
     }

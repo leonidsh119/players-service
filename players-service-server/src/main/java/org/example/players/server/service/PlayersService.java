@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class GraphService {
+public class PlayersService {
     private final Logger _logger = LoggerFactory.getLogger(getClass());
 
     @Autowired

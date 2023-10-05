@@ -1,7 +1,7 @@
 package org.example.players.server.controller;
 
 import org.example.players.sdk.FindUnreachableNodesRequest;
-import org.example.players.server.service.GraphService;
+import org.example.players.server.service.PlayersService;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/algo")
-public class AlgoController extends BaseController {
+@RequestMapping("/players")
+public class PlayersController extends BaseController {
     private final Logger _logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private GraphService _service;
+    private PlayersService _service;
 
     @PostMapping
     @Schema
