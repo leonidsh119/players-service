@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mend.graph</groupId>
-    <artifactId>mend-graph-service</artifactId>
+    <groupId>org.example.players</groupId>
+    <artifactId>players-service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Graph Service</name>
-    <description>Parent POM for Graph Service</description>
+    <name>Players Service</name>
+    <description>Parent POM for Players Service</description>
 
     <modules>
-        <module>mend-graph-service-contract</module>
-        <module>mend-graph-service-sdk</module>
-        <module>mend-graph-service-server</module>
+        <module>players-service-contract</module>
+        <module>players-service-sdk</module>
+        <module>players-service-server</module>
     </modules>
 
     <parent>
@@ -37,12 +37,12 @@
             <!--Project dependencies-->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>mend-graph-service-contract</artifactId>
+                <artifactId>players-service-contract</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>mend-graph-service-sdk</artifactId>
+                <artifactId>players-service-sdk</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
