@@ -1,10 +1,12 @@
 package org.example.players.server.model;
 
+import org.antlr.v4.runtime.misc.NotNull;
+
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
 //@Document(collection = "Player")
-public class PlayerEntity {
+public class PlayerEntity implements Comparable<PlayerEntity> {
     private String playerID;
     private String birthYear;
     private String birthMonth;
@@ -266,5 +268,10 @@ public class PlayerEntity {
 
     public void setBbrefID(String bbrefID) {
         this.bbrefID = bbrefID;
+    }
+
+    @Override
+    public int compareTo(PlayerEntity other) {
+        return this.playerID.compareTo(other.playerID);
     }
 }

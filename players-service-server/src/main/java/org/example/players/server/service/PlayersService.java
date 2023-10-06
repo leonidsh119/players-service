@@ -3,6 +3,7 @@ package org.example.players.server.service;
 import org.example.players.sdk.Player;
 import org.example.players.server.exception.EntityNotFoundException;
 import org.example.players.server.model.PlayerEntity;
+import org.example.players.server.repositories.PlayerDAO;
 import org.example.players.server.service.parser.PlayerReader;
 import org.example.players.server.service.parser.PlayerReaderFactory;
 import org.slf4j.Logger;
@@ -15,16 +16,16 @@ import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class PlayersService {
     private final Logger _logger = LoggerFactory.getLogger(getClass());
-    private Map<String, PlayerEntity> _players;
 
     @Autowired
-    PlayerReaderFactory _playerReaderFactory;
+    private PlayerReaderFactory _playerReaderFactory;
+
+    @Autowired
+    private PlayerDAO _playerDao;
 
     @PostConstruct
     private void initPlayers() {
@@ -32,9 +33,8 @@ public class PlayersService {
         _logger.trace("Initializing Players database from resource [{}]", resourceName);
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(resourceName)) {
             PlayerReader reader = _playerReaderFactory.create("CSV");
-            List<PlayerEntity> players = reader.readAllPlayers(is);
-            _players = players.stream().collect(Collectors.toMap(PlayerEntity::getPlayerID, player -> player));
-            _logger.info("Players database initialized with [{}] entities.", _players.size());
+            reader.readAllPlayers(is).forEach(_playerDao::save);
+            _logger.info("Players database initialized with [{}] entities.", _playerDao.count());
         } catch (IOException e) {
             _logger.error("Failed initializing Players database from resource file [{}]", resourceName);
         }
@@ -42,12 +42,15 @@ public class PlayersService {
 
     public List<Player> listPlayers() {
         _logger.trace("Listing All Players");
-        return _players.values().stream().map(this::toResponse).toList();
+        return _playerDao.get(null, 50, 0) // TODO: Get pagination attributes from request
+                .stream()
+                .map(this::toResponse)
+                .toList();
     }
 
     public Player getPlayer(String playerId) {
         _logger.trace("Retrieving Player with ID [{}]", playerId);
-        PlayerEntity entity = _players.get(playerId);
+        PlayerEntity entity = _playerDao.getById(playerId);
         if(entity == null) {
             _logger.error("Player with ID [{}] not found", playerId);
             throw new EntityNotFoundException("Player", playerId);
