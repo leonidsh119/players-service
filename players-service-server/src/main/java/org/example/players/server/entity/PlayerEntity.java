@@ -1,6 +1,4 @@
-package org.example.players.server.model;
-
-import org.antlr.v4.runtime.misc.NotNull;
+package org.example.players.server.entity;
 
 //@Data
 //@NoArgsConstructor

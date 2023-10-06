@@ -1,7 +1,7 @@
 package org.example.players.server.repositories;
 
 import org.example.players.server.data.PlayerMap;
-import org.example.players.server.model.PlayerEntity;
+import org.example.players.server.entity.PlayerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

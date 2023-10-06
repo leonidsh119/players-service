@@ -2,7 +2,7 @@ package org.example.players.server.service;
 
 import org.example.players.sdk.Player;
 import org.example.players.server.exception.EntityNotFoundException;
-import org.example.players.server.model.PlayerEntity;
+import org.example.players.server.entity.PlayerEntity;
 import org.example.players.server.repositories.PlayerDAO;
 import org.example.players.server.service.parser.PlayerReader;
 import org.example.players.server.service.parser.PlayerReaderFactory;

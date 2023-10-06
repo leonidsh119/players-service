@@ -1,6 +1,6 @@
 package org.example.players.server.data;
 
-import org.example.players.server.model.PlayerEntity;
+import org.example.players.server.entity.PlayerEntity;
 
 import java.util.HashMap;
 import java.util.Map;
