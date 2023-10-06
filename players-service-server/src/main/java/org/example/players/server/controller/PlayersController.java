@@ -2,6 +2,7 @@ package org.example.players.server.controller;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import org.example.players.sdk.Player;
+import org.example.players.server.assembler.PlayerModelAssembler;
 import org.example.players.server.entity.PlayerEntity;
 import org.example.players.server.service.PlayersService;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,6 +12,8 @@ import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +25,12 @@ public class PlayersController extends BaseController {
 
     @Autowired
     private PlayersService _service;
+
+    @Autowired
+    private PlayerModelAssembler playerModelAssembler;
+
+    @Autowired
+    private PagedResourcesAssembler<PlayerEntity> pagedResourcesAssembler;
 
     @GetMapping
     @Schema
@@ -37,8 +46,8 @@ public class PlayersController extends BaseController {
 
     @GetMapping("/page")
     @PageableAsQueryParam
-    public Page<Player> findAll(@Parameter(hidden=true) Pageable pageable) {
-        Page<PlayerEntity> page = _service.getPlayersPage(pageable);
-        return null;
+    public PagedModel<Player> findAll(@Parameter(hidden=true) Pageable pageable) {
+        Page<PlayerEntity> entities = _service.getPlayersPage(pageable);
+        return pagedResourcesAssembler.toModel(entities, playerModelAssembler);
     }
 }

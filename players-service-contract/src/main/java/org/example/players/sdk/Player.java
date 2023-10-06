@@ -1,7 +1,9 @@
 package org.example.players.sdk;
 
-public class Player {
-    private final String playerID;
+import org.springframework.hateoas.RepresentationModel;
+
+public class Player extends RepresentationModel<Player> {
+    private String playerID;
     private String birthYear;
     private String birthMonth;
     private String birthDay;
@@ -25,6 +27,10 @@ public class Player {
     private String finalGame;
     private String retroID;
     private String bbrefID;
+
+    public Player() {
+
+    }
 
     public Player(String playerID) {
         this.playerID = playerID;
