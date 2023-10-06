@@ -1,11 +1,16 @@
 package org.example.players.server.controller;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.example.players.sdk.Player;
+import org.example.players.server.entity.PlayerEntity;
 import org.example.players.server.service.PlayersService;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +33,12 @@ public class PlayersController extends BaseController {
     @Schema
     Player getPlayer(@RequestParam("playerID") String playerId) {
         return _service.getPlayer(playerId);
+    }
+
+    @GetMapping("/page")
+    @PageableAsQueryParam
+    public Page<Player> findAll(@Parameter(hidden=true) Pageable pageable) {
+        Page<PlayerEntity> page = _service.getPlayersPage(pageable);
+        return null;
     }
 }

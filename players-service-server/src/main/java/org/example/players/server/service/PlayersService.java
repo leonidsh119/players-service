@@ -12,11 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
 
-import java.awt.print.Pageable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -75,8 +75,8 @@ public class PlayersService {
 
     @Transactional
     public Page<PlayerEntity> getPlayersPage(Pageable pageable) {
-        _logger.trace("Getting Page of Players");
-        return _playerPgnDao.findAll((org.springframework.data.domain.Pageable) pageable);
+        _logger.trace("Getting Page {} of {} Players. Offset {}.", pageable.getPageNumber(), pageable.getPageSize(), pageable.getOffset());
+        return _playerPgnDao.findAll(pageable);
     }
 
     public Player toResponse(PlayerEntity player) {
