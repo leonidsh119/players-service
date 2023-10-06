@@ -1,10 +1,11 @@
 package org.example.players.server.entity;
 
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Document(collection = "Player")
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class PlayerEntity implements Comparable<PlayerEntity> {
+    @Id
     private String playerID;
     private String birthYear;
     private String birthMonth;

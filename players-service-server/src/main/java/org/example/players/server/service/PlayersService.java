@@ -1,21 +1,26 @@
 package org.example.players.server.service;
 
+import jakarta.transaction.Transactional;
 import org.example.players.sdk.Player;
 import org.example.players.server.exception.EntityNotFoundException;
 import org.example.players.server.entity.PlayerEntity;
-import org.example.players.server.repositories.PlayerDAO;
+import org.example.players.server.repositories.PlayerJpaRepository;
+import org.example.players.server.repositories.PlayerPagingAndSortingRepository;
 import org.example.players.server.service.parser.PlayerReader;
 import org.example.players.server.service.parser.PlayerReaderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
 
+import java.awt.print.Pageable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlayersService {
@@ -25,38 +30,53 @@ public class PlayersService {
     private PlayerReaderFactory _playerReaderFactory;
 
     @Autowired
-    private PlayerDAO _playerDao;
+    private PlayerJpaRepository _playerJpaDao;
+
+    @Autowired
+    private PlayerPagingAndSortingRepository _playerPgnDao;
 
     @PostConstruct
+    @Transactional
     private void initPlayers() {
         String resourceName = "Player.csv";
         _logger.trace("Initializing Players database from resource [{}]", resourceName);
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(resourceName)) {
             PlayerReader reader = _playerReaderFactory.create("CSV");
-            reader.readAllPlayers(is).forEach(_playerDao::save);
-            _logger.info("Players database initialized with [{}] entities.", _playerDao.count());
+            List<PlayerEntity> playerEntities = reader.readAllPlayers(is);
+            _playerJpaDao.saveAll(playerEntities);
+            _logger.info("Players database initialized with [{}] entities.", playerEntities.size());
         } catch (IOException e) {
             _logger.error("Failed initializing Players database from resource file [{}]", resourceName);
         }
     }
 
+    @Transactional
     public List<Player> listPlayers() {
         _logger.trace("Listing All Players");
-        return _playerDao.get(null, 50, 0) // TODO: Get pagination attributes from request
+        return _playerJpaDao
+                .findAll()
                 .stream()
                 .map(this::toResponse)
                 .toList();
     }
 
+    @Transactional
     public Player getPlayer(String playerId) {
         _logger.trace("Retrieving Player with ID [{}]", playerId);
-        PlayerEntity entity = _playerDao.getById(playerId);
-        if(entity == null) {
+        Optional<PlayerEntity> entity = _playerJpaDao.findById(playerId);
+        if(entity.isPresent()) {
+            _logger.trace("Found Player with ID [{}]", playerId);
+            return toResponse(entity.get());
+        } else {
             _logger.error("Player with ID [{}] not found", playerId);
             throw new EntityNotFoundException("Player", playerId);
         }
-        _logger.trace("Found Player with ID [{}]", playerId);
-        return toResponse(entity);
+    }
+
+    @Transactional
+    public Page<PlayerEntity> getPlayersPage(Pageable pageable) {
+        _logger.trace("Getting Page of Players");
+        return _playerPgnDao.findAll((org.springframework.data.domain.Pageable) pageable);
     }
 
     public Player toResponse(PlayerEntity player) {
