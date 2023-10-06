@@ -3,6 +3,7 @@ package org.example.players.server.repositories;
 import org.example.players.server.data.PlayerMap;
 import org.example.players.server.entity.PlayerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -16,12 +17,12 @@ public class MapPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public List<PlayerEntity> get(String sortBy, int size, int offset) {
+    public List<PlayerEntity> get(Pageable pageable) {
         return _players
                 .getPlayers()
                 .sorted() // TODO: Check how it works
-                .skip(offset)
-                .limit(size)
+                .skip(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .toList();
     }
 

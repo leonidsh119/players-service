@@ -9,6 +9,8 @@ import org.example.players.server.service.parser.PlayerReaderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
@@ -40,12 +42,13 @@ public class PlayersService {
         }
     }
 
-    public List<Player> listPlayers() {
+    public Page<PlayerEntity> listPlayers(Pageable pageable) {
         _logger.trace("Listing All Players");
-        return _playerDao.get(null, 50, 0) // TODO: Get pagination attributes from request
+        Page<Player> page = Page.empty();
+        _playerDao.get(pageable)
                 .stream()
-                .map(this::toResponse)
-                .toList();
+                .(page.);
+        return page;
     }
 
     public Player getPlayer(String playerId) {

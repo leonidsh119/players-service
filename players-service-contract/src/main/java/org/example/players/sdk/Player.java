@@ -1,6 +1,8 @@
 package org.example.players.sdk;
 
-public class Player {
+import org.springframework.hateoas.RepresentationModel;
+
+public class Player extends RepresentationModel<Player> {
     private final String playerID;
     private String birthYear;
     private String birthMonth;
