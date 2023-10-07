@@ -6,7 +6,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.example.players.sdk.Player;
 import org.example.players.server.controller.PlayersController;
 import org.example.players.server.entity.PlayerEntity;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -21,45 +20,34 @@ public class PlayerModelAssembler
     @Override
     public Player toModel(PlayerEntity entity)
     {
-        Player albumModel = instantiateModel(entity);
-
-//        albumModel.add(linkTo(
-//                methodOn(PlayersController.class)
-//                        .getActorById(entity.getPlayerID()))
-//                .withSelfRel());
-
-//        albumModel.setId(entity.getId());
-//        albumModel.setTitle(entity.getTitle());
-//        albumModel.setDescription(entity.getDescription());
-//        albumModel.setReleaseDate(entity.getReleaseDate());
-//        albumModel.setActors(toActorModel(entity.getActors()));
-        return albumModel;
+        return instantiateModel(entity)
+                .withPlayerID(entity.getPlayerID())
+                .withBirthYear(entity.getBirthYear())
+                .withBirthMonth(entity.getBirthMonth())
+                .withBirthDay(entity.getBirthDay())
+                .withBirthCountry(entity.getBirthCountry())
+                .withBirthState(entity.getBirthState())
+                .withBirthCity(entity.getBirthCity())
+                .withDeathYear(entity.getDeathYear())
+                .withDeathMonth(entity.getDeathMonth())
+                .withDeathDay(entity.getDeathDay())
+                .withDeathCountry(entity.getDeathCountry())
+                .withDeathState(entity.getDeathState())
+                .withDeathCity(entity.getDeathCity())
+                .withNameFirst(entity.getNameFirst())
+                .withNameLast(entity.getNameLast())
+                .withNameGiven(entity.getNameGiven())
+                .withWeight(entity.getWeight())
+                .withHeight(entity.getHeight())
+                .withBats(entity.getBats())
+                .withThrowz(entity.getThrowz())
+                .withDebut(entity.getDebut())
+                .withFinalGame(entity.getFinalGame())
+                .withRetroID(entity.getRetroID())
+                .withBbrefID(entity.getBbrefID())
+                .add(linkTo(
+                methodOn(PlayersController.class)
+                        .getPlayerById(entity.getPlayerID()))
+                .withSelfRel());
     }
-
-    @Override
-    public CollectionModel<Player> toCollectionModel(Iterable<? extends PlayerEntity> entities)
-    {
-        CollectionModel<Player> models = super.toCollectionModel(entities);
-
-        //models.add(linkTo(methodOn(PlayersController.class).getAllAlbums()).withSelfRel());
-
-        return models;
-    }
-
-//    private List<Player> toActorModel(List<PlayerEntity> actors) {
-//        if (actors.isEmpty())
-//            return Collections.emptyList();
-//
-//        return actors.stream()
-//                .map(actor -> Player.builder()
-//                        .id(actor.getId())
-//                        .firstName(actor.getFirstName())
-//                        .lastName(actor.getLastName())
-//                        .build()
-//                        .add(linkTo(
-//                                methodOn(PlayersController.class)
-//                                        .getActorById(actor.getPlayerID()))
-//                                .withSelfRel()))
-//                .collect(Collectors.toList());
-//    }
 }

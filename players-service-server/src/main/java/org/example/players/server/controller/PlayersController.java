@@ -34,19 +34,19 @@ public class PlayersController extends BaseController {
 
     @GetMapping
     @Schema
-    List<Player> listPlayers() {
+    public List<Player> getAllPlayers() {
         return _service.listPlayers();
     }
 
     @GetMapping("/{playerID}")
     @Schema
-    Player getPlayer(@RequestParam("playerID") String playerId) {
+    public Player getPlayerById(@RequestParam("playerID") String playerId) {
         return _service.getPlayer(playerId);
     }
 
     @GetMapping("/page")
     @PageableAsQueryParam
-    public PagedModel<Player> findAll(@Parameter(hidden=true) Pageable pageable) {
+    public PagedModel<Player> getPlayersPageable(@Parameter(hidden=true) Pageable pageable) {
         Page<PlayerEntity> entities = _service.getPlayersPage(pageable);
         return pagedResourcesAssembler.toModel(entities, playerModelAssembler);
     }

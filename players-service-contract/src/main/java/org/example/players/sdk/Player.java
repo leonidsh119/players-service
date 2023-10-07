@@ -40,6 +40,15 @@ public class Player extends RepresentationModel<Player> {
         return playerID;
     }
 
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
+    }
+
+    public Player withPlayerID(String playerID) {
+        setPlayerID(playerID);
+        return this;
+    }
+
     public String getBirthYear() {
         return birthYear;
     }
