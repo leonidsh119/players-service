@@ -1,6 +1,8 @@
 package org.example.players.sdk;
 
-public interface IGraphSdk {
+import org.example.players.model.FindUnreachableNodesRequest;
+
+public interface IPlayersSdk {
     String findUnreachableNodes(FindUnreachableNodesRequest request);
     boolean healthCheck();
 }

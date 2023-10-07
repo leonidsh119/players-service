@@ -3,7 +3,7 @@ package org.example.players.server.assembler;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import org.example.players.sdk.Player;
+import org.example.players.model.Player;
 import org.example.players.server.controller.PlayersController;
 import org.example.players.server.entity.PlayerEntity;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;

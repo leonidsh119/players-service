@@ -1,8 +1,8 @@
 package org.example.players.server;
 
-import org.example.players.sdk.FindUnreachableNodesRequest;
-import org.example.players.sdk.GraphSdk;
-import org.example.players.sdk.IGraphSdk;
+import org.example.players.model.FindUnreachableNodesRequest;
+import org.example.players.sdk.PlayersSdk;
+import org.example.players.sdk.IPlayersSdk;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -13,11 +13,11 @@ import jakarta.annotation.PostConstruct;
 public class GraphAlgoTest {
     @LocalServerPort
     private int _randomServerPort;
-    private IGraphSdk _sdk;
+    private IPlayersSdk _sdk;
 
     @PostConstruct
     private void initSdk() {
-        _sdk = new GraphSdk("localhost", _randomServerPort);
+        _sdk = new PlayersSdk("localhost", _randomServerPort);
     }
 
     @Test

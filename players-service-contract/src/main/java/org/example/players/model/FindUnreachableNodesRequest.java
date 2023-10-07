@@ -1,4 +1,4 @@
-package org.example.players.sdk;
+package org.example.players.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

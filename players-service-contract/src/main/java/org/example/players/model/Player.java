@@ -1,4 +1,4 @@
-package org.example.players.sdk;
+package org.example.players.model;
 
 import org.springframework.hateoas.RepresentationModel;
 

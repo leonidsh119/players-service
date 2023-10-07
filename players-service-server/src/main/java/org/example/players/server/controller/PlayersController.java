@@ -1,7 +1,7 @@
 package org.example.players.server.controller;
 
 import io.swagger.v3.oas.annotations.Parameter;
-import org.example.players.sdk.Player;
+import org.example.players.model.Player;
 import org.example.players.server.assembler.PlayerModelAssembler;
 import org.example.players.server.entity.PlayerEntity;
 import org.example.players.server.service.PlayersService;

@@ -1,6 +1,6 @@
 package org.example.players.server.controller;
 
-import org.example.players.sdk.HealthCheckResponse;
+import org.example.players.model.HealthCheckResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

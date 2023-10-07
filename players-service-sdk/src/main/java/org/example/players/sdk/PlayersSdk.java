@@ -1,20 +1,21 @@
 package org.example.players.sdk;
 
+import org.example.players.model.FindUnreachableNodesRequest;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.MessageFormat;
 
-public class GraphSdk implements IGraphSdk {
+public class PlayersSdk implements IPlayersSdk {
     private final RestTemplate _restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
     private String _apiEndpoint;
 
-    public GraphSdk(String serviceUrl) {
+    public PlayersSdk(String serviceUrl) {
         _apiEndpoint = MessageFormat.format("{0}/api", serviceUrl);
     }
 
-    public GraphSdk(String ip, int port) {
+    public PlayersSdk(String ip, int port) {
         this(MessageFormat.format("{0}{1}:{2}", ip.contains("//") ? "" : "http://", ip, Integer.toString(port)));
     }
 

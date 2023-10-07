@@ -1,4 +1,4 @@
-package org.example.players.sdk;
+package org.example.players.model;
 
 public class HealthCheckResponse {
     private String application;
