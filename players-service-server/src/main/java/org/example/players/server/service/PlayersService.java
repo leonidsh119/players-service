@@ -1,7 +1,7 @@
 package org.example.players.server.service;
 
 import jakarta.transaction.Transactional;
-import org.example.players.sdk.Player;
+import org.example.players.server.assembler.PlayerModelAssembler;
 import org.example.players.server.exception.EntityNotFoundException;
 import org.example.players.server.entity.PlayerEntity;
 import org.example.players.server.repositories.PlayerJpaRepository;
@@ -51,22 +51,21 @@ public class PlayersService {
     }
 
     @Transactional
-    public List<Player> listPlayers() {
-        _logger.trace("Listing All Players");
+    public List<PlayerEntity> listPlayers() {
+        _logger.warn("Listing All Players. This method should not be used!");
         return _playerJpaDao
                 .findAll()
                 .stream()
-                .map(this::toResponse)
                 .toList();
     }
 
     @Transactional
-    public Player getPlayer(String playerId) {
+    public PlayerEntity getPlayer(String playerId) {
         _logger.trace("Retrieving Player with ID [{}]", playerId);
         Optional<PlayerEntity> entity = _playerJpaDao.findById(playerId);
         if(entity.isPresent()) {
             _logger.trace("Found Player with ID [{}]", playerId);
-            return toResponse(entity.get());
+            return entity.get();
         } else {
             _logger.error("Player with ID [{}] not found", playerId);
             throw new EntityNotFoundException("Player", playerId);
@@ -77,32 +76,5 @@ public class PlayersService {
     public Page<PlayerEntity> getPlayersPage(Pageable pageable) {
         _logger.trace("Getting Page {} of {} Players. Offset {}.", pageable.getPageNumber(), pageable.getPageSize(), pageable.getOffset());
         return _playerPgnDao.findAll(pageable);
-    }
-
-    public Player toResponse(PlayerEntity player) {
-        return new Player(player.getPlayerID())
-                .withBirthYear(player.getBirthYear())
-                .withBirthMonth(player.getBirthMonth())
-                .withBirthDay(player.getBirthDay())
-                .withBirthCountry(player.getBirthCountry())
-                .withBirthState(player.getBirthState())
-                .withBirthCity(player.getBirthCity())
-                .withDeathYear(player.getDeathYear())
-                .withDeathMonth(player.getDeathMonth())
-                .withDeathDay(player.getDeathDay())
-                .withDeathCountry(player.getDeathCountry())
-                .withDeathState(player.getDeathState())
-                .withDeathCity(player.getDeathCity())
-                .withNameFirst(player.getNameFirst())
-                .withNameLast(player.getNameLast())
-                .withNameGiven(player.getNameGiven())
-                .withWeight(player.getWeight())
-                .withHeight(player.getHeight())
-                .withBats(player.getBats())
-                .withThrowz(player.getThrowz())
-                .withDebut(player.getDebut())
-                .withFinalGame(player.getFinalGame())
-                .withRetroID(player.getRetroID())
-                .withBbrefID(player.getBbrefID());
     }
 }

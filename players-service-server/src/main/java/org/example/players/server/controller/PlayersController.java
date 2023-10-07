@@ -27,27 +27,35 @@ public class PlayersController extends BaseController {
     private PlayersService _service;
 
     @Autowired
-    private PlayerModelAssembler playerModelAssembler;
+    private PlayerModelAssembler _playerModelAssembler;
 
     @Autowired
-    private PagedResourcesAssembler<PlayerEntity> pagedResourcesAssembler;
-
-    @GetMapping
-    @Schema
-    public List<Player> getAllPlayers() {
-        return _service.listPlayers();
-    }
+    private PagedResourcesAssembler<PlayerEntity> _pagedResourcesAssembler;
 
     @GetMapping("/{playerID}")
     @Schema
     public Player getPlayerById(@RequestParam("playerID") String playerId) {
-        return _service.getPlayer(playerId);
+        _logger.trace("Called GET Player {}", playerId);
+        PlayerEntity playerEntity = _service.getPlayer(playerId);
+        return _playerModelAssembler.toModel(playerEntity);
     }
 
-    @GetMapping("/page")
+    @GetMapping
     @PageableAsQueryParam
     public PagedModel<Player> getPlayersPageable(@Parameter(hidden=true) Pageable pageable) {
+        _logger.trace("Called GET Players Page {}. Size {}, Offset {}.", pageable.getPageNumber(), pageable.getPageSize(), pageable.getOffset());
         Page<PlayerEntity> entities = _service.getPlayersPage(pageable);
-        return pagedResourcesAssembler.toModel(entities, playerModelAssembler);
+        return _pagedResourcesAssembler.toModel(entities, _playerModelAssembler);
+    }
+
+//    @GetMapping("/all")
+//    @Schema
+    public List<Player> getAllPlayers() {
+        _logger.warn("Called GET All Players. Ths method is prohibited to use.");
+        return _service
+                .listPlayers()
+                .stream()
+                .map(_playerModelAssembler::toModel)
+                .toList();
     }
 }
