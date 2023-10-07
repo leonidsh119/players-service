@@ -1,21 +1,42 @@
 package org.example.players.model;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.hateoas.RepresentationModel;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
 public class Player extends RepresentationModel<Player> {
+    @NotBlank
     private String playerID;
+
+    @Min(1900)
+    @Max(2099)
     private String birthYear;
+
+    @Min(1)
+    @Max(12)
     private String birthMonth;
+
+    @Min(1)
+    @Max(31)
     private String birthDay;
     private String birthCountry;
     private String birthState;
     private String birthCity;
+
+    @Min(1900)
+    @Max(2099)
     private String deathYear;
+
+    @Min(1)
+    @Max(21)
     private String deathMonth;
+
+    @Min(1)
+    @Max(31)
     private String deathDay;
     private String deathCountry;
     private String deathState;
@@ -23,7 +44,13 @@ public class Player extends RepresentationModel<Player> {
     private String nameFirst;
     private String nameLast;
     private String nameGiven;
+
+    @Min(40)
+    @Max(200)
     private String weight;
+
+    @Min(140)
+    @Max(300)
     private String height;
     private String bats;
     private String throwz;
