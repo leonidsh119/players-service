@@ -2,6 +2,10 @@ package org.example.players.model;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Objects;
+
 public class Player extends RepresentationModel<Player> {
     private String playerID;
     private String birthYear;
@@ -27,6 +31,34 @@ public class Player extends RepresentationModel<Player> {
     private String finalGame;
     private String retroID;
     private String bbrefID;
+
+    public static Player fromList(Iterable<String> attributes) {
+        Iterator<String> iterator = attributes.iterator();
+        return new Player(iterator.next())
+                .withBirthYear(iterator.next())
+                .withBirthMonth(iterator.next())
+                .withBirthDay(iterator.next())
+                .withBirthCountry(iterator.next())
+                .withBirthState(iterator.next())
+                .withBirthCity(iterator.next())
+                .withDeathYear(iterator.next())
+                .withDeathMonth(iterator.next())
+                .withDeathDay(iterator.next())
+                .withDeathCountry(iterator.next())
+                .withDeathState(iterator.next())
+                .withDeathCity(iterator.next())
+                .withNameFirst(iterator.next())
+                .withNameLast(iterator.next())
+                .withNameGiven(iterator.next())
+                .withWeight(iterator.next())
+                .withHeight(iterator.next())
+                .withBats(iterator.next())
+                .withThrowz(iterator.next())
+                .withDebut(iterator.next())
+                .withFinalGame(iterator.next())
+                .withRetroID(iterator.next())
+                .withBbrefID(iterator.next());
+    }
 
     public Player() {
 
@@ -346,5 +378,42 @@ public class Player extends RepresentationModel<Player> {
     public Player withBbrefID(String bbrefID) {
         this.bbrefID = bbrefID;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Player player = (Player) o;
+        return Objects.equals(playerID, player.playerID)
+                && Objects.equals(birthYear, player.birthYear)
+                && Objects.equals(birthMonth, player.birthMonth)
+                && Objects.equals(birthDay, player.birthDay)
+                && Objects.equals(birthCountry, player.birthCountry)
+                && Objects.equals(birthState, player.birthState)
+                && Objects.equals(birthCity, player.birthCity)
+                && Objects.equals(deathYear, player.deathYear)
+                && Objects.equals(deathMonth, player.deathMonth)
+                && Objects.equals(deathDay, player.deathDay)
+                && Objects.equals(deathCountry, player.deathCountry)
+                && Objects.equals(deathState, player.deathState)
+                && Objects.equals(deathCity, player.deathCity)
+                && Objects.equals(nameFirst, player.nameFirst)
+                && Objects.equals(nameLast, player.nameLast)
+                && Objects.equals(nameGiven, player.nameGiven)
+                && Objects.equals(weight, player.weight)
+                && Objects.equals(height, player.height)
+                && Objects.equals(bats, player.bats)
+                && Objects.equals(throwz, player.throwz)
+                && Objects.equals(debut, player.debut)
+                && Objects.equals(finalGame, player.finalGame)
+                && Objects.equals(retroID, player.retroID)
+                && Objects.equals(bbrefID, player.bbrefID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), playerID, birthYear, birthMonth, birthDay, birthCountry, birthState, birthCity, deathYear, deathMonth, deathDay, deathCountry, deathState, deathCity, nameFirst, nameLast, nameGiven, weight, height, bats, throwz, debut, finalGame, retroID, bbrefID);
     }
 }

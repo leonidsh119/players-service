@@ -3,6 +3,8 @@ package org.example.players.server.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.util.Iterator;
+
 @Entity
 public class PlayerEntity implements Comparable<PlayerEntity> {
     @Id
@@ -37,39 +39,39 @@ public class PlayerEntity implements Comparable<PlayerEntity> {
         this.playerID = playerID;
     }
 
-    public PlayerEntity(String[] attributes) {
-        if(attributes == null || attributes.length < 1) {
+    public static PlayerEntity fromList(Iterable<String> attributes) {
+        if (attributes == null) {
             throw new RuntimeException("Attributes array can't be null. Must have at least one element for PlayerID.");
         }
-        if(attributes.length < 24) {
-            String[] largerArray = new String[24];
-            System.arraycopy(attributes, 0, largerArray, 0, attributes.length);
-            attributes = largerArray;
+        Iterator<String> iterator = attributes.iterator();
+        if (!iterator.hasNext()) {
+            throw new RuntimeException("Attributes array can't be empty. Must have at least one element for PlayerID.");
         }
-        this.playerID = attributes[0];
-        this.birthYear = attributes[1];
-        this.birthMonth = attributes[2];
-        this.birthDay = attributes[3];
-        this.birthCountry = attributes[4];
-        this.birthState = attributes[5];
-        this.birthCity = attributes[6];
-        this.deathYear = attributes[7];
-        this.deathMonth = attributes[8];
-        this.deathDay = attributes[9];
-        this.deathCountry = attributes[10];
-        this.deathState = attributes[11];
-        this.deathCity = attributes[12];
-        this.nameFirst = attributes[13];
-        this.nameLast = attributes[14];
-        this.nameGiven = attributes[15];
-        this.weight = attributes[16];
-        this.height = attributes[17];
-        this.bats = attributes[18];
-        this.throwz = attributes[19];
-        this.debut = attributes[20];
-        this.finalGame = attributes[21];
-        this.retroID = attributes[22];
-        this.bbrefID = attributes[23];
+        PlayerEntity entity = new PlayerEntity(iterator.next());
+        entity.setBirthYear(iterator.next());
+        entity.setBirthMonth(iterator.next());
+        entity.setBirthDay(iterator.next());
+        entity.setBirthCountry(iterator.next());
+        entity.setBirthState(iterator.next());
+        entity.setBirthCity(iterator.next());
+        entity.setDeathYear(iterator.next());
+        entity.setDeathMonth(iterator.next());
+        entity.setDeathDay(iterator.next());
+        entity.setDeathCountry(iterator.next());
+        entity.setDeathState(iterator.next());
+        entity.setDeathCity(iterator.next());
+        entity.setNameFirst(iterator.next());
+        entity.setNameLast(iterator.next());
+        entity.setNameGiven(iterator.next());
+        entity.setWeight(iterator.next());
+        entity.setHeight(iterator.next());
+        entity.setBats(iterator.next());
+        entity.setThrowz(iterator.next());
+        entity.setDebut(iterator.next());
+        entity.setFinalGame(iterator.next());
+        entity.setRetroID(iterator.next());
+        entity.setBbrefID(iterator.next());
+        return entity;
     }
 
     public String getPlayerID() {

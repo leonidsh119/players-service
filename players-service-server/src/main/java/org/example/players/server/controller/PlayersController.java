@@ -34,7 +34,7 @@ public class PlayersController extends BaseController {
 
     @GetMapping("/{playerID}")
     @Schema
-    public Player getPlayerById(@RequestParam("playerID") String playerId) {
+    public Player getPlayerById(@PathVariable("playerID") String playerId) {
         _logger.trace("Called GET Player {}", playerId);
         PlayerEntity playerEntity = _service.getPlayer(playerId);
         return _playerModelAssembler.toModel(playerEntity);

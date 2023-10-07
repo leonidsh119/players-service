@@ -1,18 +1,19 @@
 package org.example.players.sdk;
 
-import org.example.players.model.FindUnreachableNodesRequest;
-import org.springframework.http.*;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
+import org.example.players.model.Player;
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 
 import java.text.MessageFormat;
 
-public class PlayersSdk implements IPlayersSdk {
-    private final RestTemplate _restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-    private String _apiEndpoint;
+public class PlayersSdk extends BaseSdk implements IPlayersSdk {
 
     public PlayersSdk(String serviceUrl) {
-        _apiEndpoint = MessageFormat.format("{0}/api", serviceUrl);
+        super(serviceUrl);
     }
 
     public PlayersSdk(String ip, int port) {
@@ -20,29 +21,22 @@ public class PlayersSdk implements IPlayersSdk {
     }
 
     @Override
-    public String findUnreachableNodes(FindUnreachableNodesRequest request) {
-        String url = MessageFormat.format("{0}/players", _apiEndpoint);
-        ResponseEntity<String> responseEntity = sendRequest(url, HttpMethod.POST, new HttpEntity<>(request), String.class);
-        return responseEntity.getBody();
+    public Player getPlayerById(String playerId) {
+        String url = MessageFormat.format("{0}/players/{1}", _apiEndpoint, playerId);
+        try {
+            ResponseEntity<Player> responseEntity = sendRequest(url, HttpMethod.GET, new HttpEntity(new HttpHeaders()), Player.class);
+            return responseEntity.getBody();
+        } catch (Exception exception) {
+            return null;
+        }
+
     }
 
     @Override
-    public boolean healthCheck() {
-        String url = MessageFormat.format("{0}/healthcheck", _apiEndpoint);
-        try {
-            ResponseEntity<Void> responseEntity = sendRequest(url, HttpMethod.GET, new HttpEntity(new HttpHeaders()), Void.class);
-            return responseEntity.getStatusCode().equals(HttpStatus.OK);
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private <T> ResponseEntity<T> sendRequest(String url, HttpMethod method, Class<T> responseType) {
-        return this.sendRequest(url, method, (HttpEntity)null, responseType);
-    }
-
-    private <T> ResponseEntity<T> sendRequest(String url, HttpMethod method, HttpEntity<?> entity, Class<T> responseType) {
-        return _restTemplate.exchange(url, method, entity, responseType);
-        // TODO: Handle errors
+    public PagedModel<Player> getPlayersPageable(Pageable pageable) {
+        String url = MessageFormat.format("{0}/players", _apiEndpoint);
+        ResponseEntity<Object> responseEntity = sendRequest(url, HttpMethod.GET, new HttpEntity(new HttpHeaders()), Object.class);
+        PagedModel<Player> body = (PagedModel<Player>)responseEntity.getBody();
+        return body;
     }
 }
