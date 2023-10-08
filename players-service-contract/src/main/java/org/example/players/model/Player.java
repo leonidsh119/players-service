@@ -37,7 +37,7 @@ public class Player extends RepresentationModel<Player> {
     @Schema(example = "Cynthiana", description = "City of Birth")
     private String birthCity;
 
-    @Min(1900)
+    @Min(1800)
     @Max(2099)
     @Schema(example = "1937", description = "Year of Death")
     private Integer deathYear;
@@ -70,29 +70,29 @@ public class Player extends RepresentationModel<Player> {
     @Schema(example = "Stanley Milton", description = "Given Name")
     private String nameGiven;
 
-    @Min(40)
-    @Max(200)
+    @Min(0)
+    @Max(500)
     @Schema(example = "190", description = "Weight (Pound)")
     private Integer weight;
 
-    @Min(140)
-    @Max(300)
+    @Min(0)
+    @Max(150)
     @Schema(example = "75", description = "Height (inch)")
     private Integer height;
 
-    @Pattern(regexp = "^([LR])$", message = "{ L(eft) | R(ight) }")
+    @Pattern(regexp = "^([LRBS])$|^$", message = "{ L(eft) | R(ight) | B(oth) | S(witch) | null }")
     @Schema(example = "L", description = "Player's Batting Hand")
     private String bats;
 
-    @Pattern(regexp = "^([LR])$", message = "{ L(eft) | R(ight) }")
+    @Pattern(regexp = "^([LRBS])$|^$", message = "{ L(eft) | R(ight) | B(oth) | S(witch) | null }")
     @Schema(example = "L", description = "Player's Throwing Hand")
     private String throwz;
 
-    @Pattern(regexp = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")
+    @Pattern(regexp = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$|^$", message = "Date in YYYY-MM-DD format or null")
     @Schema(example = "1918-06-12", description = "Date of the Player's Debut")
     private String debut;
 
-    @Pattern(regexp = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")
+    @Pattern(regexp = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$|^$", message = "Date in YYYY-MM-DD format or null")
     @Schema(example = "1918-07-19", description = "Date of the Player's Final Game")
     private String finalGame;
 

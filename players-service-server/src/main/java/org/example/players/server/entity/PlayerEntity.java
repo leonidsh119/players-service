@@ -2,23 +2,42 @@ package org.example.players.server.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 import java.util.Iterator;
 
 @Entity
 public class PlayerEntity implements Comparable<PlayerEntity> {
     @Id
+    @NotBlank
     @NotNull
     private String playerID;
+
+    @Min(1800)
+    @Max(2099)
     private Integer birthYear;
+
+    @Min(1)
+    @Max(12)
     private Integer birthMonth;
+
+    @Min(1)
+    @Max(31)
     private Integer birthDay;
     private String birthCountry;
     private String birthState;
     private String birthCity;
+
+    @Min(1800)
+    @Max(2099)
     private Integer deathYear;
+
+    @Min(1)
+    @Max(12)
     private Integer deathMonth;
+
+    @Min(1)
+    @Max(31)
     private Integer deathDay;
     private String deathCountry;
     private String deathState;
@@ -26,11 +45,25 @@ public class PlayerEntity implements Comparable<PlayerEntity> {
     private String nameFirst;
     private String nameLast;
     private String nameGiven;
+
+    @Min(0)
+    @Max(500)
     private Integer weight;
+
+    @Min(0)
+    @Max(150)
     private Integer height;
+
+    @Pattern(regexp = "^([LRBS])$|^$", message = "{ L(eft) | R(ight) | B(oth) | S(witch) | null }")
     private String bats;
+
+    @Pattern(regexp = "^([LRBS])$|^$", message = "{ L(eft) | R(ight) | B(oth) | S(witch) | null }")
     private String throwz;
+
+    @Pattern(regexp = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$|^$", message = "Date in YYYY-MM-DD format or null")
     private String debut;
+
+    @Pattern(regexp = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$|^$", message = "Date in YYYY-MM-DD format or null")
     private String finalGame;
     private String retroID;
     private String bbrefID;
@@ -82,11 +115,6 @@ public class PlayerEntity implements Comparable<PlayerEntity> {
 
     public void setPlayerID(String playerID) {
         this.playerID = playerID;
-    }
-
-    public PlayerEntity withPlayerID(String playerID) {
-        setPlayerID(playerID);
-        return this;
     }
 
     public Integer getBirthYear() {
