@@ -1,8 +1,10 @@
 package org.example.players.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Iterator;
@@ -10,75 +12,115 @@ import java.util.Objects;
 
 public class Player extends RepresentationModel<Player> {
     @NotBlank
+    @NotNull
+    @Schema(example = "reesst01", description = "Player ID")
     private String playerID;
 
-    @Min(1900)
+    @Min(1800)
     @Max(2099)
-    private String birthYear;
+    @Schema(example = "1889", description = "Year of Birth")
+    private Integer birthYear;
 
     @Min(1)
     @Max(12)
-    private String birthMonth;
+    @Schema(example = "2", description = "Month of Birth")
+    private Integer birthMonth;
 
     @Min(1)
     @Max(31)
-    private String birthDay;
+    @Schema(example = "25", description = "Month of Birth")
+    private Integer birthDay;
+
+    @Schema(example = "USA", description = "Country of Birth")
     private String birthCountry;
+
+    @Schema(example = "KY", description = "State of Birth")
     private String birthState;
+
+    @Schema(example = "Cynthiana", description = "City of Birth")
     private String birthCity;
 
     @Min(1900)
     @Max(2099)
-    private String deathYear;
+    @Schema(example = "1937", description = "Year of Death")
+    private Integer deathYear;
 
     @Min(1)
     @Max(21)
-    private String deathMonth;
+    @Schema(example = "8", description = "Month of Death")
+    private Integer deathMonth;
 
     @Min(1)
     @Max(31)
-    private String deathDay;
+    @Schema(example = "29", description = "Day of Death")
+    private Integer deathDay;
+
+    @Schema(example = "USA", description = "Country of Death")
     private String deathCountry;
+
+    @Schema(example = "KY", description = "State of Death")
     private String deathState;
+
+    @Schema(example = "Lexington", description = "City of Death")
     private String deathCity;
+
+    @Schema(example = "Stan", description = "First Name")
     private String nameFirst;
+
+    @Schema(example = "Rees", description = "Last Name")
     private String nameLast;
+
+    @Schema(example = "Stanley Milton", description = "Given Name")
     private String nameGiven;
 
     @Min(40)
     @Max(200)
-    private String weight;
+    @Schema(example = "190", description = "Weight (Pound)")
+    private Integer weight;
 
     @Min(140)
     @Max(300)
-    private String height;
+    @Schema(example = "75", description = "Height (inch)")
+    private Integer height;
+
+    @Schema(example = "L", description = "Bats")
     private String bats;
+
+    @Schema(example = "L", description = "Throws")
     private String throwz;
+
+    @Schema(example = "1918-06-12", description = "Date of Debut")
     private String debut;
+
+    @Schema(example = "1918-07-19", description = "Date of Final Game")
     private String finalGame;
+
+    @Schema(example = "reess101", description = "Old Player ID")
     private String retroID;
+
+    @Schema(example = "reess01", description = "Yet Another Player ID")
     private String bbrefID;
 
     public static Player fromList(Iterable<String> attributes) {
         Iterator<String> iterator = attributes.iterator();
         return new Player(iterator.next())
-                .withBirthYear(iterator.next())
-                .withBirthMonth(iterator.next())
-                .withBirthDay(iterator.next())
+                .withBirthYear(valueOfOrNull(iterator.next()))
+                .withBirthMonth(valueOfOrNull(iterator.next()))
+                .withBirthDay(valueOfOrNull(iterator.next()))
                 .withBirthCountry(iterator.next())
                 .withBirthState(iterator.next())
                 .withBirthCity(iterator.next())
-                .withDeathYear(iterator.next())
-                .withDeathMonth(iterator.next())
-                .withDeathDay(iterator.next())
+                .withDeathYear(valueOfOrNull(iterator.next()))
+                .withDeathMonth(valueOfOrNull(iterator.next()))
+                .withDeathDay(valueOfOrNull(iterator.next()))
                 .withDeathCountry(iterator.next())
                 .withDeathState(iterator.next())
                 .withDeathCity(iterator.next())
                 .withNameFirst(iterator.next())
                 .withNameLast(iterator.next())
                 .withNameGiven(iterator.next())
-                .withWeight(iterator.next())
-                .withHeight(iterator.next())
+                .withWeight(valueOfOrNull(iterator.next()))
+                .withHeight(valueOfOrNull(iterator.next()))
                 .withBats(iterator.next())
                 .withThrowz(iterator.next())
                 .withDebut(iterator.next())
@@ -108,41 +150,41 @@ public class Player extends RepresentationModel<Player> {
         return this;
     }
 
-    public String getBirthYear() {
+    public int getBirthYear() {
         return birthYear;
     }
 
-    public void setBirthYear(String birthYear) {
+    public void setBirthYear(int birthYear) {
         this.birthYear = birthYear;
     }
 
-    public Player withBirthYear(String birthYear) {
+    public Player withBirthYear(int birthYear) {
         this.birthYear = birthYear;
         return this;
     }
 
-    public String getBirthMonth() {
+    public int getBirthMonth() {
         return birthMonth;
     }
 
-    public void setBirthMonth(String birthMonth) {
+    public void setBirthMonth(int birthMonth) {
         this.birthMonth = birthMonth;
     }
 
-    public Player withBirthMonth(String birthMonth) {
+    public Player withBirthMonth(int birthMonth) {
         this.birthMonth = birthMonth;
         return this;
     }
 
-    public String getBirthDay() {
+    public int getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(String birthDay) {
+    public void setBirthDay(int birthDay) {
         this.birthDay = birthDay;
     }
 
-    public Player withBirthDay(String birthDay) {
+    public Player withBirthDay(int birthDay) {
         this.birthDay = birthDay;
         return this;
     }
@@ -186,41 +228,41 @@ public class Player extends RepresentationModel<Player> {
         return this;
     }
 
-    public String getDeathYear() {
+    public int getDeathYear() {
         return deathYear;
     }
 
-    public void setDeathYear(String deathYear) {
+    public void setDeathYear(int deathYear) {
         this.deathYear = deathYear;
     }
 
-    public Player withDeathYear(String deathYear) {
+    public Player withDeathYear(int deathYear) {
         this.deathYear = deathYear;
         return this;
     }
 
-    public String getDeathMonth() {
+    public int getDeathMonth() {
         return deathMonth;
     }
 
-    public void setDeathMonth(String deathMonth) {
+    public void setDeathMonth(int deathMonth) {
         this.deathMonth = deathMonth;
     }
 
-    public Player withDeathMonth(String deathMonth) {
+    public Player withDeathMonth(int deathMonth) {
         this.deathMonth = deathMonth;
         return this;
     }
 
-    public String getDeathDay() {
+    public int getDeathDay() {
         return deathDay;
     }
 
-    public void setDeathDay(String deathDay) {
+    public void setDeathDay(int deathDay) {
         this.deathDay = deathDay;
     }
 
-    public Player withDeathDay(String deathDay) {
+    public Player withDeathDay(int deathDay) {
         this.deathDay = deathDay;
         return this;
     }
@@ -303,28 +345,28 @@ public class Player extends RepresentationModel<Player> {
         return this;
     }
 
-    public String getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public Player withWeight(String weight) {
+    public Player withWeight(int weight) {
         this.weight = weight;
         return this;
     }
 
-    public String getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public Player withHeight(String height) {
+    public Player withHeight(int height) {
         this.height = height;
         return this;
     }
@@ -442,5 +484,17 @@ public class Player extends RepresentationModel<Player> {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), playerID, birthYear, birthMonth, birthDay, birthCountry, birthState, birthCity, deathYear, deathMonth, deathDay, deathCountry, deathState, deathCity, nameFirst, nameLast, nameGiven, weight, height, bats, throwz, debut, finalGame, retroID, bbrefID);
+    }
+
+    private static Integer valueOfOrNull(String str) {
+        if(str == null || str.isBlank()) {
+            return null;
+        } else {
+            try {
+                return Integer.valueOf(str);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
     }
 }

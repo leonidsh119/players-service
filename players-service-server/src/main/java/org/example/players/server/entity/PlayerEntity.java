@@ -2,30 +2,32 @@ package org.example.players.server.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Iterator;
 
 @Entity
 public class PlayerEntity implements Comparable<PlayerEntity> {
     @Id
+    @NotNull
     private String playerID;
-    private String birthYear;
-    private String birthMonth;
-    private String birthDay;
+    private Integer birthYear;
+    private Integer birthMonth;
+    private Integer birthDay;
     private String birthCountry;
     private String birthState;
     private String birthCity;
-    private String deathYear;
-    private String deathMonth;
-    private String deathDay;
+    private Integer deathYear;
+    private Integer deathMonth;
+    private Integer deathDay;
     private String deathCountry;
     private String deathState;
     private String deathCity;
     private String nameFirst;
     private String nameLast;
     private String nameGiven;
-    private String weight;
-    private String height;
+    private Integer weight;
+    private Integer height;
     private String bats;
     private String throwz;
     private String debut;
@@ -48,23 +50,23 @@ public class PlayerEntity implements Comparable<PlayerEntity> {
             throw new RuntimeException("Attributes array can't be empty. Must have at least one element for PlayerID.");
         }
         PlayerEntity entity = new PlayerEntity(iterator.next());
-        entity.setBirthYear(iterator.next());
-        entity.setBirthMonth(iterator.next());
-        entity.setBirthDay(iterator.next());
+        entity.setBirthYear(valueOfOrNull(iterator.next()));
+        entity.setBirthMonth(valueOfOrNull(iterator.next()));
+        entity.setBirthDay(valueOfOrNull(iterator.next()));
         entity.setBirthCountry(iterator.next());
         entity.setBirthState(iterator.next());
         entity.setBirthCity(iterator.next());
-        entity.setDeathYear(iterator.next());
-        entity.setDeathMonth(iterator.next());
-        entity.setDeathDay(iterator.next());
+        entity.setDeathYear(valueOfOrNull(iterator.next()));
+        entity.setDeathMonth(valueOfOrNull(iterator.next()));
+        entity.setDeathDay(valueOfOrNull(iterator.next()));
         entity.setDeathCountry(iterator.next());
         entity.setDeathState(iterator.next());
         entity.setDeathCity(iterator.next());
         entity.setNameFirst(iterator.next());
         entity.setNameLast(iterator.next());
         entity.setNameGiven(iterator.next());
-        entity.setWeight(iterator.next());
-        entity.setHeight(iterator.next());
+        entity.setWeight(valueOfOrNull(iterator.next()));
+        entity.setHeight(valueOfOrNull(iterator.next()));
         entity.setBats(iterator.next());
         entity.setThrowz(iterator.next());
         entity.setDebut(iterator.next());
@@ -87,27 +89,27 @@ public class PlayerEntity implements Comparable<PlayerEntity> {
         return this;
     }
 
-    public String getBirthYear() {
+    public Integer getBirthYear() {
         return birthYear;
     }
 
-    public void setBirthYear(String birthYear) {
+    public void setBirthYear(Integer birthYear) {
         this.birthYear = birthYear;
     }
 
-    public String getBirthMonth() {
+    public Integer getBirthMonth() {
         return birthMonth;
     }
 
-    public void setBirthMonth(String birthMonth) {
+    public void setBirthMonth(Integer birthMonth) {
         this.birthMonth = birthMonth;
     }
 
-    public String getBirthDay() {
+    public Integer getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(String birthDay) {
+    public void setBirthDay(Integer birthDay) {
         this.birthDay = birthDay;
     }
 
@@ -135,27 +137,27 @@ public class PlayerEntity implements Comparable<PlayerEntity> {
         this.birthCity = birthCity;
     }
 
-    public String getDeathYear() {
+    public Integer getDeathYear() {
         return deathYear;
     }
 
-    public void setDeathYear(String deathYear) {
+    public void setDeathYear(Integer deathYear) {
         this.deathYear = deathYear;
     }
 
-    public String getDeathMonth() {
+    public Integer getDeathMonth() {
         return deathMonth;
     }
 
-    public void setDeathMonth(String deathMonth) {
+    public void setDeathMonth(Integer deathMonth) {
         this.deathMonth = deathMonth;
     }
 
-    public String getDeathDay() {
+    public Integer getDeathDay() {
         return deathDay;
     }
 
-    public void setDeathDay(String deathDay) {
+    public void setDeathDay(Integer deathDay) {
         this.deathDay = deathDay;
     }
 
@@ -207,19 +209,19 @@ public class PlayerEntity implements Comparable<PlayerEntity> {
         this.nameGiven = nameGiven;
     }
 
-    public String getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 
-    public String getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
@@ -274,5 +276,17 @@ public class PlayerEntity implements Comparable<PlayerEntity> {
     @Override
     public int compareTo(PlayerEntity other) {
         return this.playerID.compareTo(other.playerID);
+    }
+
+    private static Integer valueOfOrNull(String str) {
+        if(str == null || str.isBlank()) {
+            return null;
+        } else {
+            try {
+                return Integer.valueOf(str);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
     }
 }
