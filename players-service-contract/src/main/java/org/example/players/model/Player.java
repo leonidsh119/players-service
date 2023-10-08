@@ -150,41 +150,41 @@ public class Player extends RepresentationModel<Player> {
         return this;
     }
 
-    public int getBirthYear() {
+    public Integer getBirthYear() {
         return birthYear;
     }
 
-    public void setBirthYear(int birthYear) {
+    public void setBirthYear(Integer birthYear) {
         this.birthYear = birthYear;
     }
 
-    public Player withBirthYear(int birthYear) {
+    public Player withBirthYear(Integer birthYear) {
         this.birthYear = birthYear;
         return this;
     }
 
-    public int getBirthMonth() {
+    public Integer getBirthMonth() {
         return birthMonth;
     }
 
-    public void setBirthMonth(int birthMonth) {
+    public void setBirthMonth(Integer birthMonth) {
         this.birthMonth = birthMonth;
     }
 
-    public Player withBirthMonth(int birthMonth) {
+    public Player withBirthMonth(Integer birthMonth) {
         this.birthMonth = birthMonth;
         return this;
     }
 
-    public int getBirthDay() {
+    public Integer getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(int birthDay) {
+    public void setBirthDay(Integer birthDay) {
         this.birthDay = birthDay;
     }
 
-    public Player withBirthDay(int birthDay) {
+    public Player withBirthDay(Integer birthDay) {
         this.birthDay = birthDay;
         return this;
     }
@@ -228,41 +228,41 @@ public class Player extends RepresentationModel<Player> {
         return this;
     }
 
-    public int getDeathYear() {
+    public Integer getDeathYear() {
         return deathYear;
     }
 
-    public void setDeathYear(int deathYear) {
+    public void setDeathYear(Integer deathYear) {
         this.deathYear = deathYear;
     }
 
-    public Player withDeathYear(int deathYear) {
+    public Player withDeathYear(Integer deathYear) {
         this.deathYear = deathYear;
         return this;
     }
 
-    public int getDeathMonth() {
+    public Integer getDeathMonth() {
         return deathMonth;
     }
 
-    public void setDeathMonth(int deathMonth) {
+    public void setDeathMonth(Integer deathMonth) {
         this.deathMonth = deathMonth;
     }
 
-    public Player withDeathMonth(int deathMonth) {
+    public Player withDeathMonth(Integer deathMonth) {
         this.deathMonth = deathMonth;
         return this;
     }
 
-    public int getDeathDay() {
+    public Integer getDeathDay() {
         return deathDay;
     }
 
-    public void setDeathDay(int deathDay) {
+    public void setDeathDay(Integer deathDay) {
         this.deathDay = deathDay;
     }
 
-    public Player withDeathDay(int deathDay) {
+    public Player withDeathDay(Integer deathDay) {
         this.deathDay = deathDay;
         return this;
     }
@@ -345,28 +345,28 @@ public class Player extends RepresentationModel<Player> {
         return this;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 
-    public Player withWeight(int weight) {
+    public Player withWeight(Integer weight) {
         this.weight = weight;
         return this;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public Player withHeight(int height) {
+    public Player withHeight(Integer height) {
         this.height = height;
         return this;
     }
