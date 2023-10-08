@@ -1,10 +1,7 @@
 package org.example.players.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Iterator;
@@ -83,16 +80,20 @@ public class Player extends RepresentationModel<Player> {
     @Schema(example = "75", description = "Height (inch)")
     private Integer height;
 
-    @Schema(example = "L", description = "Bats")
+    @Pattern(regexp = "^([LR])$", message = "{ L(eft) | R(ight) }")
+    @Schema(example = "L", description = "Player's Batting Hand")
     private String bats;
 
-    @Schema(example = "L", description = "Throws")
+    @Pattern(regexp = "^([LR])$", message = "{ L(eft) | R(ight) }")
+    @Schema(example = "L", description = "Player's Throwing Hand")
     private String throwz;
 
-    @Schema(example = "1918-06-12", description = "Date of Debut")
+    @Pattern(regexp = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")
+    @Schema(example = "1918-06-12", description = "Date of the Player's Debut")
     private String debut;
 
-    @Schema(example = "1918-07-19", description = "Date of Final Game")
+    @Pattern(regexp = "^\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")
+    @Schema(example = "1918-07-19", description = "Date of the Player's Final Game")
     private String finalGame;
 
     @Schema(example = "reess101", description = "Old Player ID")
