@@ -40,8 +40,7 @@ The service provides API visibility and OpenAPI documentation via Swagger UI:
 http://localhost/api/swagger-ui/index.html
 
 ## 4. What could be done more
-- Request Validaiton (less critical until readonly API)
 - Alternative DB Sources (MongoDB could improve performance as long as we use only whole document reads)
-- Additional Tests
+- Additional API Tests
 - Authorization (Springboot Security)
 - AspectJ
